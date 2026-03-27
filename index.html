@@ -87,11 +87,20 @@ body { background: var(--bg); color: var(--dark); font-family: var(--font-body);
 <body>
 <header class="site-header">
   <div class="logo-wrap">
-    <div>
-      <div class="logo-circles"><div class="logo-dot"></div><div class="logo-dot out"></div><div class="logo-dot"></div></div>
-      <div class="logo-apex">Apex</div>
-      <div class="logo-ins">Insurance</div>
-    </div>
+    <svg width="140" height="44" viewBox="0 0 140 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Three circles in triangle arrangement -->
+      <circle cx="14" cy="30" r="8" fill="#c6101e"/>
+      <circle cx="30" cy="30" r="8" fill="#c6101e"/>
+      <circle cx="22" cy="16" r="8" fill="#c6101e"/>
+      <!-- Connecting lines -->
+      <line x1="14" y1="30" x2="22" y2="16" stroke="#c6101e" stroke-width="2"/>
+      <line x1="30" y1="30" x2="22" y2="16" stroke="#c6101e" stroke-width="2"/>
+      <line x1="14" y1="30" x2="30" y2="30" stroke="#c6101e" stroke-width="2"/>
+      <!-- APEX text -->
+      <text x="44" y="26" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="900" font-size="20" fill="#ffffff" letter-spacing="2">APEX</text>
+      <!-- INSURANCE text -->
+      <text x="44" y="38" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="400" font-size="9" fill="#c6101e" letter-spacing="3">INSURANCE</text>
+    </svg>
   </div>
   <div class="header-mod">PI Proposal Intake</div>
 </header>
