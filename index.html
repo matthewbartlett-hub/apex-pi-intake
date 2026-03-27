@@ -82,6 +82,21 @@ body { background: var(--bg); color: var(--dark); font-family: var(--font-body);
 .crm-link { display: inline-flex; align-items: center; gap: 5px; color: var(--red); text-decoration: none; font-family: var(--font-head); font-size: 11px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; margin-top: 12px; }
 .crm-link:hover { text-decoration: underline; }
 .hidden { display: none !important; }
+
+.compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-bottom: 16px; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+.compare-header { font-family: var(--font-head); font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 10px 14px; background: var(--charcoal); color: rgba(255,255,255,0.6); }
+.compare-header.new { background: var(--red); color: #fff; }
+.compare-row { display: contents; }
+.compare-row:nth-child(even) .compare-cell { background: #fafafa; }
+.compare-cell { padding: 8px 14px; border-bottom: 1px solid var(--light); font-size: 12px; }
+.compare-cell .cell-label { font-family: var(--font-head); font-size: 9px; letter-spacing: 0.8px; text-transform: uppercase; color: var(--muted); margin-bottom: 2px; }
+.compare-cell .cell-val { font-family: var(--font-mono); font-size: 12px; color: var(--dark); word-break: break-word; }
+.compare-cell .cell-val.empty { color: #ccc; font-style: italic; }
+.compare-cell.diff { background: #fffbeb !important; border-left: 3px solid #f59e0b; }
+.compare-cell.diff-new { background: #f0faf3 !important; border-left: 3px solid var(--success); }
+.field-toggle { display: flex; align-items: center; gap: 8px; margin-top: 4px; }
+.toggle-label { font-family: var(--font-head); font-size: 9px; color: var(--muted); letter-spacing: 0.5px; }
+input.field-cb { width: 14px; height: 14px; accent-color: var(--red); cursor: pointer; }
 </style>
 </head>
 <body>
@@ -316,32 +331,125 @@ async function checkCRM() {
       log('<span class="note">⚠ Match found in ' + foundMod + '</span>');
       const name = found.Company || ((found.First_Name||'') + ' ' + (found.Last_Name||'')).trim() || 'Unknown';
 
-      // Attach the PDF to the existing record
-      if (found.id) {
-        log('<span class="dim">→ Attaching proposal PDF to existing record…</span>');
-        try {
-          const fname = document.getElementById('fileChosen').textContent.replace('📄 ','').split(' (')[0] || 'proposal.pdf';
-          const attachResp = await fetch(WORKER, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ action: 'zoho_attach', token, module: foundMod, recordId: found.id, pdfBase64: pdfB64, filename: fname })
-          });
-          const attachData = await attachResp.json();
-          if (attachData.data?.[0]?.code === 'SUCCESS' || attachData.data?.[0]?.status === 'success') {
-            log('<span class="ok">✓ Proposal attached to existing record</span>');
-          } else {
-            log('<span class="warn">⚠ Attachment may have failed: ' + JSON.stringify(attachData).substring(0,80) + '</span>');
-          }
-        } catch(e) {
-          log('<span class="warn">⚠ Attachment error: ' + e.message + '</span>');
-        }
-      }
+      // Fetch full existing record
+      log('<span class="dim">→ Fetching existing record data…</span>');
+      let existing = {};
+      try {
+        const getResp = await fetch(WORKER, {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'zoho_get', token, module: foundMod, recordId: found.id })
+        });
+        const getData = await getResp.json();
+        existing = getData.data?.[0] || {};
+        log('<span class="ok">✓ Existing record loaded</span>');
+      } catch(e) { log('<span class="warn">⚠ Could not fetch existing data: ' + e.message + '</span>'); }
 
-      document.getElementById('crm-banner').innerHTML = `<div class="banner b-warn"><div class="bi">⚠</div><div><strong>Record already exists in Zoho CRM</strong><br>Found in <strong>${foundMod}</strong>: ${name}<br><span style="font-size:12px">Proposal PDF attached to existing record.</span></div></div>`;
-      let act = '';
-      if (found.id) act += `<a class="crm-link" href="https://crm.zoho.com/crm/org/crm/${foundMod.toLowerCase()}/${found.id}" target="_blank">↗ Open in Zoho CRM</a><br>`;
+      // Map extracted fields to Zoho fields for comparison
+      const FIELD_MAP = [
+        { label: 'Company', extracted: fields.company_name, zohoKey: 'Company' },
+        { label: 'Contact Name', extracted: fields.contact_name, zohoKey: '_name' },
+        { label: 'Email', extracted: fields.email, zohoKey: 'Email' },
+        { label: 'Phone', extracted: fields.phone, zohoKey: 'Phone' },
+        { label: 'Address', extracted: fields.address, zohoKey: 'Street' },
+      ];
+
+      const existingName = ((existing.First_Name||'') + ' ' + (existing.Last_Name||'')).trim();
+
+      // Build comparison table
+      let compHtml = `<div class="compare-grid">
+        <div class="compare-header">In Zoho CRM</div>
+        <div class="compare-header new">From Proposal</div>`;
+
+      const updatableFields = [];
+      FIELD_MAP.forEach((f, i) => {
+        const crmVal = f.zohoKey === '_name' ? existingName : (existing[f.zohoKey] || '');
+        const newVal = f.extracted || '';
+        const isDiff = crmVal.trim().toLowerCase() !== newVal.trim().toLowerCase() && newVal;
+        const crmClass = isDiff ? 'compare-cell diff' : 'compare-cell';
+        const newClass = isDiff ? 'compare-cell diff-new' : 'compare-cell';
+        const cbId = 'update_' + i;
+        if (isDiff) updatableFields.push({ id: cbId, zohoKey: f.zohoKey, label: f.label, newVal, existingName });
+        compHtml += `<div class="${crmClass}">
+          <div class="cell-label">${f.label}</div>
+          <div class="cell-val ${crmVal ? '' : 'empty'}">${crmVal || '—'}</div>
+        </div>
+        <div class="${newClass}">
+          <div class="cell-label">${f.label}${isDiff ? ' <span style="color:var(--success);font-weight:700">NEW</span>' : ''}</div>
+          <div class="cell-val ${newVal ? '' : 'empty'}">${newVal || '—'}</div>
+          ${isDiff ? `<div class="field-toggle"><input type="checkbox" class="field-cb" id="${cbId}" checked><label class="toggle-label" for="${cbId}">Update this field</label></div>` : ''}
+        </div>`;
+      });
+
+      compHtml += '</div>';
+
+      // Attach PDF + show update UI
+      log('<span class="dim">→ Attaching proposal PDF…</span>');
+      try {
+        const fname = document.getElementById('fileChosen').textContent.replace('📄 ','').split(' (')[0] || 'proposal.pdf';
+        const attachResp = await fetch(WORKER, {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'zoho_attach', token, module: foundMod, recordId: found.id, pdfBase64: pdfB64, filename: fname })
+        });
+        const attachData = await attachResp.json();
+        if (attachData.data?.[0]?.code === 'SUCCESS' || attachData.data?.[0]?.status === 'success') {
+          log('<span class="ok">✓ Proposal PDF attached to record</span>');
+        } else {
+          log('<span class="warn">⚠ Attachment issue: ' + JSON.stringify(attachData).substring(0,60) + '</span>');
+        }
+      } catch(e) { log('<span class="warn">⚠ Attachment error: ' + e.message + '</span>'); }
+
+      document.getElementById('crm-banner').innerHTML = `<div class="banner b-warn"><div class="bi">⚠</div><div><strong>Record already exists in Zoho CRM</strong><br>Found in <strong>${foundMod}</strong>: ${name}<br><span style="font-size:12px">PDF attached. Review differences below and choose which fields to update.</span></div></div>`;
+
+      const hasDiffs = updatableFields.length > 0;
+      let act = compHtml;
+      if (hasDiffs) {
+        act += `<button class="btn btn-red" id="btn-update-record" style="margin-top:4px">Update Selected Fields in Zoho</button> `;
+      }
+      act += `<a class="crm-link" href="https://crm.zoho.com/crm/org/crm/${foundMod.toLowerCase()}/${found.id}" target="_blank" style="margin-top:${hasDiffs?'12px':'4px'}">↗ Open in Zoho CRM</a><br>`;
       act += `<button class="btn btn-ghost" style="margin-top:14px" onclick="resetForNext()">Process Another Proposal</button>`;
       document.getElementById('crm-actions').innerHTML = act;
+
+      if (hasDiffs) {
+        document.getElementById('btn-update-record').addEventListener('click', async () => {
+          const updateBtn = document.getElementById('btn-update-record');
+          updateBtn.disabled = true; updateBtn.innerHTML = '<span class="spinner"></span>&nbsp;Updating…';
+          const updateData = {};
+          updatableFields.forEach(f => {
+            const cb = document.getElementById(f.id);
+            if (cb && cb.checked) {
+              if (f.zohoKey === '_name') {
+                const np = (f.newVal||'').trim().split(' ');
+                updateData['First_Name'] = np.length > 1 ? np[0] : '';
+                updateData['Last_Name'] = np.length > 1 ? np.slice(1).join(' ') : np[0];
+              } else {
+                updateData[f.zohoKey] = f.newVal;
+              }
+            }
+          });
+          if (Object.keys(updateData).length === 0) {
+            alert('No fields selected to update.');
+            updateBtn.disabled = false; updateBtn.innerHTML = 'Update Selected Fields in Zoho';
+            return;
+          }
+          try {
+            const updResp = await fetch(WORKER, {
+              method: 'POST', headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ action: 'zoho_update', token, module: foundMod, recordId: found.id, updateData })
+            });
+            const updData = await updResp.json();
+            if (updData.data?.[0]?.code === 'SUCCESS' || updData.data?.[0]?.status === 'success') {
+              updateBtn.style.display = 'none';
+              document.getElementById('crm-banner').innerHTML = `<div class="banner b-ok"><div class="bi">✓</div><div><strong>Record updated in Zoho CRM</strong><br>${Object.keys(updateData).length} field(s) updated on ${name}.</div></div>`;
+            } else {
+              alert('Update failed: ' + JSON.stringify(updData));
+              updateBtn.disabled = false; updateBtn.innerHTML = 'Update Selected Fields in Zoho';
+            }
+          } catch(e) {
+            alert('Update error: ' + e.message);
+            updateBtn.disabled = false; updateBtn.innerHTML = 'Update Selected Fields in Zoho';
+          }
+        });
+      }
     } else {
       log('<span class="dim">→ No match — creating new Lead…</span>');
       const np = (fields.contact_name||'').trim().split(' ');
