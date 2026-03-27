@@ -6,33 +6,19 @@
 <title>Apex Insurance — PI Proposal Intake</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap');
-
 :root {
-  --red: #c6101e;
-  --red-dark: #a50e19;
-  --red-light: #fdf0f1;
-  --charcoal: #111111;
-  --dark: #333333;
-  --mid: #464849;
-  --muted: #999999;
-  --light: #eeeeee;
-  --mauve: #967678;
-  --bg: #b9bcbf;
-  --white: #ffffff;
-  --border: #d8d8d8;
-  --success: #1a6b30;
-  --success-light: #f0faf3;
-  --warn-light: #fdf8e8;
+  --red: #c6101e; --red-dark: #a50e19; --red-light: #fdf0f1;
+  --charcoal: #111111; --dark: #333333; --mid: #464849;
+  --muted: #999999; --light: #eeeeee; --mauve: #967678;
+  --bg: #b9bcbf; --white: #ffffff; --border: #d8d8d8;
+  --success: #1a6b30; --success-light: #f0faf3; --warn-light: #fdf8e8;
   --font-body: 'Merriweather', Georgia, Times, serif;
   --font-head: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   --font-mono: 'Courier New', Courier, monospace;
-  --radius: 3px;
-  --shadow: 0 2px 10px rgba(0,0,0,0.12);
+  --radius: 3px; --shadow: 0 2px 10px rgba(0,0,0,0.12);
 }
-
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { background: var(--bg); color: var(--dark); font-family: var(--font-body); font-size: 14px; line-height: 1.6; min-height: 100vh; }
-
 .site-header { background: var(--charcoal); padding: 0 36px; display: flex; align-items: center; justify-content: space-between; height: 68px; border-bottom: 3px solid var(--red); position: sticky; top: 0; z-index: 100; }
 .logo-wrap { display: flex; align-items: center; gap: 12px; }
 .logo-circles { display: flex; gap: 4px; margin-bottom: 4px; }
@@ -41,9 +27,7 @@ body { background: var(--bg); color: var(--dark); font-family: var(--font-body);
 .logo-apex { font-family: var(--font-head); font-size: 18px; font-weight: 900; color: var(--white); letter-spacing: 3px; text-transform: uppercase; line-height: 1; }
 .logo-ins { font-family: var(--font-head); font-size: 9px; color: var(--red); letter-spacing: 3px; text-transform: uppercase; }
 .header-mod { font-family: var(--font-head); font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: rgba(255,255,255,0.35); }
-
 .app-wrap { display: grid; grid-template-columns: 230px 1fr; min-height: calc(100vh - 68px); }
-
 .sidebar { background: var(--charcoal); padding: 32px 0; display: flex; flex-direction: column; }
 .sb-section { padding: 0 22px; margin-bottom: 28px; }
 .sb-label { font-family: var(--font-head); font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; color: #444; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid #1e1e1e; }
@@ -55,26 +39,14 @@ body { background: var(--bg); color: var(--dark); font-family: var(--font-body);
 .step.done .step-n { border-color: #2a5a2a; background: #1a3a1a; color: #5aaa5a; }
 .step.done .step-l { color: #5aaa5a; }
 .sb-foot { margin-top: auto; padding: 20px 22px 0; border-top: 1px solid #1a1a1a; font-family: var(--font-head); font-size: 10px; color: #3a3a3a; line-height: 1.8; }
-
 .main { padding: 40px 44px 80px; max-width: 780px; }
 .eyebrow { font-family: var(--font-head); font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--red); margin-bottom: 6px; }
 .pg-title { font-family: var(--font-head); font-size: 24px; font-weight: 900; color: var(--charcoal); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
 .pg-sub { font-family: var(--font-body); font-size: 13px; font-style: italic; color: var(--mid); margin-bottom: 32px; }
-
 .card { background: var(--white); border-top: 3px solid var(--red); box-shadow: var(--shadow); margin-bottom: 22px; }
 .card-hd { padding: 14px 22px; border-bottom: 1px solid var(--light); background: #fafafa; display: flex; align-items: center; justify-content: space-between; }
 .card-title { font-family: var(--font-head); font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--charcoal); }
 .card-bd { padding: 26px 22px; }
-
-.g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
-.g3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
-.fg { display: flex; flex-direction: column; gap: 5px; }
-label { font-family: var(--font-head); font-size: 9px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--mid); }
-input[type=text], input[type=password] { font-family: var(--font-mono); font-size: 12px; padding: 8px 11px; border: 1px solid var(--border); border-radius: var(--radius); background: #fafafa; color: var(--dark); outline: none; width: 100%; transition: border-color 0.15s; }
-input:focus { border-color: var(--red); background: #fff; }
-input::placeholder { color: #ccc; }
-.hint { font-family: var(--font-head); font-size: 10px; color: var(--muted); }
-
 .drop-zone { border: 2px dashed #ccc; border-radius: var(--radius); padding: 48px 20px; text-align: center; cursor: pointer; transition: all 0.2s; position: relative; background: #fafafa; }
 .drop-zone:hover, .drop-zone.drag-over { border-color: var(--red); background: var(--red-light); }
 .drop-zone input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
@@ -83,14 +55,12 @@ input::placeholder { color: #ccc; }
 .dz-main span { color: var(--red); }
 .dz-sub { font-family: var(--font-head); font-size: 10px; color: var(--muted); letter-spacing: 0.5px; }
 .file-chosen { display: none; margin-top: 12px; font-family: var(--font-mono); font-size: 12px; color: var(--success); background: var(--success-light); padding: 7px 12px; border-radius: var(--radius); border: 1px solid #b0dfc0; }
-
 .fg-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .ef { background: #fafafa; border: 1px solid var(--border); border-radius: var(--radius); padding: 9px 13px; }
 .ef.s2 { grid-column: span 2; }
 .ef-lbl { font-family: var(--font-head); font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); margin-bottom: 3px; }
 .ef-inp { font-family: var(--font-mono); font-size: 12.5px; color: var(--dark); background: transparent; border: none; outline: none; width: 100%; padding: 0; }
 .ef-inp::placeholder { color: #ccc; }
-
 .btn { font-family: var(--font-head); font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; border: none; border-radius: var(--radius); padding: 11px 20px; cursor: pointer; transition: all 0.15s; display: inline-flex; align-items: center; gap: 8px; }
 .btn:disabled { opacity: 0.4; cursor: not-allowed; }
 .btn-red { background: var(--red); color: #fff; }
@@ -99,100 +69,49 @@ input::placeholder { color: #ccc; }
 .btn-ghost:hover:not(:disabled) { background: var(--light); }
 .btn-full { width: 100%; justify-content: center; }
 .btn-row { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
-
 .banner { border-radius: var(--radius); padding: 14px 16px; display: flex; gap: 12px; align-items: flex-start; font-size: 13px; font-family: var(--font-body); line-height: 1.6; }
 .bi { flex-shrink: 0; font-size: 15px; }
 .banner strong { font-weight: 700; }
 .b-ok { background: var(--success-light); border: 1px solid #b0dfc0; border-left: 4px solid var(--success); color: var(--success); }
 .b-warn { background: var(--warn-light); border: 1px solid #f0d98a; border-left: 4px solid #b8860b; color: #7a5a00; }
 .b-err { background: var(--red-light); border: 1px solid #f5b8bc; border-left: 4px solid var(--red); color: var(--red-dark); }
-
 .log { font-family: var(--font-mono); font-size: 11px; line-height: 1.9; margin-top: 14px; padding: 12px 14px; background: var(--charcoal); color: #888; border-radius: var(--radius); }
-.log .ok { color: #5ada7a; }
-.log .fail { color: #f87171; }
-.log .dim { color: #444; }
-.log .note { color: #fbbf24; }
-
+.log .ok { color: #5ada7a; } .log .fail { color: #f87171; } .log .dim { color: #444; } .log .note { color: #fbbf24; }
 .spinner { display: inline-block; width: 11px; height: 11px; border: 2px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%; animation: spin 0.7s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
-
-.badge { font-family: var(--font-head); font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 3px 9px; border-radius: 20px; background: var(--light); color: var(--muted); }
-.badge.ok { background: var(--success-light); color: var(--success); }
-
 .crm-link { display: inline-flex; align-items: center; gap: 5px; color: var(--red); text-decoration: none; font-family: var(--font-head); font-size: 11px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; margin-top: 12px; }
 .crm-link:hover { text-decoration: underline; }
-
 .hidden { display: none !important; }
 </style>
 </head>
 <body>
-
 <header class="site-header">
   <div class="logo-wrap">
     <div>
-      <div class="logo-circles">
-        <div class="logo-dot"></div>
-        <div class="logo-dot out"></div>
-        <div class="logo-dot"></div>
-      </div>
+      <div class="logo-circles"><div class="logo-dot"></div><div class="logo-dot out"></div><div class="logo-dot"></div></div>
       <div class="logo-apex">Apex</div>
       <div class="logo-ins">Insurance</div>
     </div>
   </div>
   <div class="header-mod">PI Proposal Intake</div>
 </header>
-
 <div class="app-wrap">
   <aside class="sidebar">
     <div class="sb-section">
       <div class="sb-label">Workflow</div>
-      <div class="step active" id="nav-1"><div class="step-n">1</div><div class="step-l">Credentials</div></div>
-      <div class="step" id="nav-2"><div class="step-n">2</div><div class="step-l">Upload Proposal</div></div>
-      <div class="step" id="nav-3"><div class="step-n">3</div><div class="step-l">Review Details</div></div>
-      <div class="step" id="nav-4"><div class="step-n">4</div><div class="step-l">CRM Check &amp; Create</div></div>
+      <div class="step active" id="nav-1"><div class="step-n">1</div><div class="step-l">Upload Proposal</div></div>
+      <div class="step" id="nav-2"><div class="step-n">2</div><div class="step-l">Review Details</div></div>
+      <div class="step" id="nav-3"><div class="step-n">3</div><div class="step-l">CRM Check &amp; Create</div></div>
     </div>
-    <div class="sb-foot">Credentials stored in<br>browser memory only.<br>Not saved to disk.</div>
+    <div class="sb-foot">Apex Insurance Brokers<br>PI Proposal Intake Tool</div>
   </aside>
-
   <main class="main">
     <div class="eyebrow">Professional Indemnity</div>
     <div class="pg-title">Proposal Intake</div>
     <div class="pg-sub">Upload a proposal form to check Zoho CRM for existing records and create leads automatically.</div>
 
-    <div class="card" id="card-config">
-      <div class="card-hd">
-        <div class="card-title">API Credentials</div>
-        <div class="badge" id="cfg-badge">Not Configured</div>
-      </div>
-      <div class="card-bd">
-        <div class="g2">
-          <div class="fg">
-            <label>Anthropic API Key</label>
-            <input type="password" id="cfg-ant" placeholder="sk-ant-…">
-            <div class="hint">Used for PDF extraction</div>
-          </div>
-          <div class="fg">
-            <label>Zoho Region</label>
-            <input type="text" id="cfg-region" value="com" placeholder="eu">
-            <div class="hint">eu · com · in · au · jp</div>
-          </div>
-        </div>
-        <div class="g3">
-          <div class="fg"><label>Client ID</label><input type="text" id="cfg-cid" placeholder="1000.XXXXX"></div>
-          <div class="fg"><label>Client Secret</label><input type="password" id="cfg-cs" placeholder="…"></div>
-          <div class="fg"><label>Refresh Token</label><input type="password" id="cfg-rt" placeholder="1000.XXXXX…"></div>
-        </div>
-        <div class="btn-row">
-          <button class="btn btn-red" id="btn-save-cfg">Save &amp; Continue</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="card hidden" id="card-upload">
-      <div class="card-hd">
-        <div class="card-title">Upload Proposal Form</div>
-        <button class="btn btn-ghost" style="padding:5px 10px;font-size:9px" id="btn-recfg">Edit Credentials</button>
-      </div>
+    <div class="card" id="card-upload">
+      <div class="card-hd"><div class="card-title">Upload Proposal Form</div></div>
       <div class="card-bd">
         <div class="drop-zone" id="dropZone">
           <input type="file" id="fileInput" accept=".pdf,.PDF">
@@ -236,244 +155,230 @@ input::placeholder { color: #ccc; }
 </div>
 
 <script>
-let cfg={}, pdfB64=null, extracted={};
+const WORKER = 'https://apex-pi-proxy.matthew-bartlett.workers.dev';
+let pdfB64 = null;
 
-function setNav(a){
-  [1,2,3,4].forEach(n=>{
-    const el=document.getElementById('nav-'+n);
+function setNav(a) {
+  [1,2,3].forEach(n => {
+    const el = document.getElementById('nav-' + n);
     el.classList.remove('active','done');
-    if(n<a) el.classList.add('done');
-    if(n===a) el.classList.add('active');
+    if (n < a) el.classList.add('done');
+    if (n === a) el.classList.add('active');
   });
 }
 
-document.getElementById('btn-save-cfg').addEventListener('click',()=>{
-  const a=document.getElementById('cfg-ant').value.trim();
-  const r=document.getElementById('cfg-region').value.trim()||'eu';
-  const ci=document.getElementById('cfg-cid').value.trim();
-  const cs=document.getElementById('cfg-cs').value.trim();
-  const rt=document.getElementById('cfg-rt').value.trim();
-  if(!a||!ci||!cs||!rt){alert('Please fill in all fields.');return;}
-  cfg={anthropic:a,region:r,clientId:ci,clientSecret:cs,refreshToken:rt};
-  const b=document.getElementById('cfg-badge');
-  b.textContent='Configured'; b.className='badge ok';
-  document.getElementById('card-upload').classList.remove('hidden');
-  setNav(2);
-  document.getElementById('card-upload').scrollIntoView({behavior:'smooth',block:'start'});
-});
+const dropZone = document.getElementById('dropZone');
+const fileInput = document.getElementById('fileInput');
+dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+dropZone.addEventListener('drop', e => { e.preventDefault(); dropZone.classList.remove('drag-over'); handleFile(e.dataTransfer.files[0]); });
+fileInput.addEventListener('change', () => handleFile(fileInput.files[0]));
 
-document.getElementById('btn-recfg').addEventListener('click',()=>{
-  ['card-upload','card-fields','card-result'].forEach(id=>document.getElementById(id).classList.add('hidden'));
-  setNav(1);
-});
-
-const dropZone=document.getElementById('dropZone');
-const fileInput=document.getElementById('fileInput');
-dropZone.addEventListener('dragover',e=>{e.preventDefault();dropZone.classList.add('drag-over');});
-dropZone.addEventListener('dragleave',()=>dropZone.classList.remove('drag-over'));
-dropZone.addEventListener('drop',e=>{e.preventDefault();dropZone.classList.remove('drag-over');handleFile(e.dataTransfer.files[0]);});
-fileInput.addEventListener('change',()=>handleFile(fileInput.files[0]));
-
-function handleFile(file){
-  if(!file||!file.name.toLowerCase().endsWith('.pdf')){alert('Please upload a PDF file.');return;}
-  const fc=document.getElementById('fileChosen');
-  fc.textContent='📄 '+file.name+' ('+(file.size/1024).toFixed(0)+' KB)';
-  fc.style.display='block';
-  const reader=new FileReader();
-  reader.onload=e=>{pdfB64=e.target.result.split(',')[1];document.getElementById('btn-extract').disabled=false;};
+function handleFile(file) {
+  if (!file || !file.name.toLowerCase().endsWith('.pdf')) { alert('Please upload a PDF file.'); return; }
+  const fc = document.getElementById('fileChosen');
+  fc.textContent = '📄 ' + file.name + ' (' + (file.size / 1024).toFixed(0) + ' KB)';
+  fc.style.display = 'block';
+  const reader = new FileReader();
+  reader.onload = e => { pdfB64 = e.target.result.split(',')[1]; document.getElementById('btn-extract').disabled = false; };
   reader.readAsDataURL(file);
 }
 
-document.getElementById('btn-reup').addEventListener('click',()=>{
-  pdfB64=null; fileInput.value='';
-  document.getElementById('fileChosen').style.display='none';
-  document.getElementById('btn-extract').disabled=true;
+document.getElementById('btn-reup').addEventListener('click', () => {
+  pdfB64 = null; fileInput.value = '';
+  document.getElementById('fileChosen').style.display = 'none';
+  document.getElementById('btn-extract').disabled = true;
+  document.getElementById('card-fields').classList.add('hidden');
+  document.getElementById('card-result').classList.add('hidden');
+  setNav(1);
+});
+
+document.getElementById('btn-extract').addEventListener('click', extractPDF);
+
+async function extractPDF() {
+  const btn = document.getElementById('btn-extract');
+  btn.disabled = true; btn.innerHTML = '<span class="spinner"></span>&nbsp;Extracting…';
   document.getElementById('card-fields').classList.add('hidden');
   document.getElementById('card-result').classList.add('hidden');
   setNav(2);
-});
-
-document.getElementById('btn-extract').addEventListener('click',extractPDF);
-
-async function extractPDF(){
-  const btn=document.getElementById('btn-extract');
-  btn.disabled=true; btn.innerHTML='<span class="spinner"></span>&nbsp;Extracting…';
-  document.getElementById('card-fields').classList.add('hidden');
-  document.getElementById('card-result').classList.add('hidden');
-  setNav(3);
-  const prompt=`You are processing a Professional Indemnity insurance proposal form. Extract these fields and return ONLY a valid JSON object (empty string if not found):
-{"company_name":"Full legal name","trading_name":"Trading name if different","contact_name":"Primary contact full name","email":"Primary email","phone":"Primary phone","address":"Full address with postcode","profession":"Type of profession or activity","sra_number":"SRA or regulatory registration number","gross_fees":"Most recent gross fees or turnover","employees":"Total staff or fee earners","indemnity_limit":"Indemnity limit requested","current_insurer":"Current PI insurer","current_broker":"Current broker","inception_date":"Inception or renewal date"}`;
-  try{
-    const resp=await fetch('https://apex-pi-proxy.matthew-bartlett.workers.dev',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({apiKey:cfg.anthropic,payload:{model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:[
-        {type:'document',source:{type:'base64',media_type:'application/pdf',data:pdfB64}},
-        {type:'text',text:prompt}
-      ]}]}})
+  try {
+    const resp = await fetch(WORKER, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'extract', pdfBase64: pdfB64 })
     });
-    if(!resp.ok){const e=await resp.json();throw new Error(e.error?.message||'Claude API error '+resp.status);}
-    const data=await resp.json();
-    const raw=data.content?.find(b=>b.type==='text')?.text||'{}';
-    extracted=JSON.parse(raw.replace(/```json|```/g,'').trim());
+    if (!resp.ok) throw new Error('Worker error ' + resp.status);
+    const data = await resp.json();
+    if (data.error) throw new Error(data.error.message || JSON.stringify(data.error));
+    const raw = data.content?.find(b => b.type === 'text')?.text || '{}';
+    const extracted = JSON.parse(raw.replace(/```json|```/g,'').trim());
     renderFields(extracted);
-    const log=document.getElementById('ext-log');
-    log.innerHTML='<span class="ok">✓ Extraction complete</span> <span class="dim">— review and correct before proceeding</span>';
+    const log = document.getElementById('ext-log');
+    log.innerHTML = '<span class="ok">✓ Extraction complete</span> <span class="dim">— review and correct before proceeding</span>';
     log.classList.remove('hidden');
     document.getElementById('card-fields').classList.remove('hidden');
-    document.getElementById('card-fields').scrollIntoView({behavior:'smooth',block:'start'});
-  }catch(err){alert('Extraction failed: '+err.message);setNav(2);}
-  btn.disabled=false; btn.innerHTML='Extract Details from PDF';
+    document.getElementById('card-fields').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } catch(err) {
+    alert('Extraction failed: ' + err.message);
+    setNav(1);
+  }
+  btn.disabled = false; btn.innerHTML = 'Extract Details from PDF';
 }
 
-const FIELDS=[
-  {key:'company_name',label:'Company Name',s2:true},
-  {key:'trading_name',label:'Trading Name'},
-  {key:'contact_name',label:'Contact Name'},
-  {key:'email',label:'Email Address'},
-  {key:'phone',label:'Phone Number'},
-  {key:'sra_number',label:'SRA / Reg Number'},
-  {key:'address',label:'Address',s2:true},
-  {key:'profession',label:'Profession / Activity',s2:true},
-  {key:'gross_fees',label:'Gross Fees'},
-  {key:'employees',label:'Staff / Fee Earners'},
-  {key:'indemnity_limit',label:'Indemnity Limit Req.'},
-  {key:'current_insurer',label:'Current Insurer'},
-  {key:'current_broker',label:'Current Broker'},
-  {key:'inception_date',label:'Inception / Renewal Date'},
+const FIELDS = [
+  { key: 'company_name', label: 'Company Name', s2: true },
+  { key: 'trading_name', label: 'Trading Name' },
+  { key: 'contact_name', label: 'Contact Name' },
+  { key: 'email', label: 'Email Address' },
+  { key: 'phone', label: 'Phone Number' },
+  { key: 'sra_number', label: 'SRA / Reg Number' },
+  { key: 'address', label: 'Address', s2: true },
+  { key: 'profession', label: 'Profession / Activity', s2: true },
+  { key: 'gross_fees', label: 'Gross Fees' },
+  { key: 'employees', label: 'Staff / Fee Earners' },
+  { key: 'indemnity_limit', label: 'Indemnity Limit Req.' },
+  { key: 'current_insurer', label: 'Current Insurer' },
+  { key: 'current_broker', label: 'Current Broker' },
+  { key: 'inception_date', label: 'Inception / Renewal Date' },
 ];
 
-function renderFields(data){
-  const grid=document.getElementById('fieldsGrid');
-  grid.innerHTML='';
-  FIELDS.forEach(({key,label,s2})=>{
-    const d=document.createElement('div');
-    d.className='ef'+(s2?' s2':'');
-    d.innerHTML=`<div class="ef-lbl">${label}</div><input class="ef-inp" type="text" data-key="${key}" value="${esc(data[key]||'')}" placeholder="—">`;
+function renderFields(data) {
+  const grid = document.getElementById('fieldsGrid');
+  grid.innerHTML = '';
+  FIELDS.forEach(({ key, label, s2 }) => {
+    const d = document.createElement('div');
+    d.className = 'ef' + (s2 ? ' s2' : '');
+    d.innerHTML = `<div class="ef-lbl">${label}</div><input class="ef-inp" type="text" data-key="${key}" value="${esc(data[key]||'')}" placeholder="—">`;
     grid.appendChild(d);
   });
 }
 
-function getEdited(){
-  const out={};
-  document.querySelectorAll('#fieldsGrid .ef-inp').forEach(i=>{out[i.dataset.key]=i.value.trim();});
+function getEdited() {
+  const out = {};
+  document.querySelectorAll('#fieldsGrid .ef-inp').forEach(i => { out[i.dataset.key] = i.value.trim(); });
   return out;
 }
 
-function esc(s){return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');}
+function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
 
-document.getElementById('btn-crm').addEventListener('click',checkCRM);
+document.getElementById('btn-crm').addEventListener('click', checkCRM);
 
-async function getToken(){
-  const url=`https://accounts.zoho.${cfg.region}/oauth/v2/token`;
-  const body=new URLSearchParams({refresh_token:cfg.refreshToken,client_id:cfg.clientId,client_secret:cfg.clientSecret,grant_type:'refresh_token'});
-  const resp=await fetch(url,{method:'POST',body});
-  if(!resp.ok) throw new Error('Zoho auth failed (HTTP '+resp.status+')');
-  const data=await resp.json();
-  if(!data.access_token) throw new Error('No access token: '+JSON.stringify(data));
-  return data.access_token;
-}
-
-async function zohoSearch(token,module,field,value){
-  if(!value) return [];
-  const url=`https://www.zohoapis.${cfg.region}/crm/v3/${module}/search?criteria=(${field}:equals:${encodeURIComponent(value)})&fields=id,Company,Last_Name,First_Name,Email`;
-  const resp=await fetch(url,{headers:{'Authorization':'Zoho-oauthtoken '+token}});
-  if(resp.status===204||!resp.ok) return [];
-  const data=await resp.json();
-  return data.data||[];
-}
-
-async function checkCRM(){
-  const fields=getEdited();
-  const btn=document.getElementById('btn-crm');
-  btn.disabled=true; btn.innerHTML='<span class="spinner"></span>&nbsp;Searching CRM…';
+async function checkCRM() {
+  const fields = getEdited();
+  const btn = document.getElementById('btn-crm');
+  btn.disabled = true; btn.innerHTML = '<span class="spinner"></span>&nbsp;Searching CRM…';
   document.getElementById('card-result').classList.remove('hidden');
-  document.getElementById('crm-banner').innerHTML='';
-  document.getElementById('crm-actions').innerHTML='';
-  const crmLog=document.getElementById('crm-log');
-  crmLog.innerHTML=''; crmLog.classList.remove('hidden');
-  setNav(4);
-  document.getElementById('card-result').scrollIntoView({behavior:'smooth',block:'start'});
-  function log(msg){crmLog.innerHTML+=msg+'<br>';}
-  try{
+  document.getElementById('crm-banner').innerHTML = '';
+  document.getElementById('crm-actions').innerHTML = '';
+  const crmLog = document.getElementById('crm-log');
+  crmLog.innerHTML = ''; crmLog.classList.remove('hidden');
+  setNav(3);
+  document.getElementById('card-result').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  function log(msg) { crmLog.innerHTML += msg + '<br>'; }
+
+  try {
     log('<span class="dim">→ Authenticating with Zoho…</span>');
-    const token=await getToken();
+    const tokenResp = await fetch(WORKER, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'zoho_token' })
+    });
+    const tokenData = await tokenResp.json();
+    if (!tokenData.access_token) throw new Error('Auth failed: ' + JSON.stringify(tokenData));
+    const token = tokenData.access_token;
     log('<span class="ok">✓ Authenticated</span>');
-    let found=null,foundMod=null;
+
+    async function search(module, field, value) {
+      if (!value) return [];
+      const resp = await fetch(WORKER, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'zoho_search', token, module, field, value })
+      });
+      const text = await resp.text();
+      try { const d = JSON.parse(text); return d.data || []; } catch(e) { return []; }
+    }
+
+    let found = null, foundMod = null;
     log('<span class="dim">→ Searching Leads by email…</span>');
-    const lE=await zohoSearch(token,'Leads','Email',fields.email);
-    if(lE.length){found=lE[0];foundMod='Leads';}
-    if(!found&&fields.company_name){
+    const lE = await search('Leads', 'Email', fields.email);
+    if (lE.length) { found = lE[0]; foundMod = 'Leads'; }
+
+    if (!found && fields.company_name) {
       log('<span class="dim">→ Searching Leads by company…</span>');
-      const lC=await zohoSearch(token,'Leads','Company',fields.company_name);
-      if(lC.length){found=lC[0];foundMod='Leads';}
+      const lC = await search('Leads', 'Company', fields.company_name);
+      if (lC.length) { found = lC[0]; foundMod = 'Leads'; }
     }
-    if(!found&&fields.email){
+
+    if (!found && fields.email) {
       log('<span class="dim">→ Searching Contacts by email…</span>');
-      const cE=await zohoSearch(token,'Contacts','Email',fields.email);
-      if(cE.length){found=cE[0];foundMod='Contacts';}
+      const cE = await search('Contacts', 'Email', fields.email);
+      if (cE.length) { found = cE[0]; foundMod = 'Contacts'; }
     }
-    if(found){
-      log('<span class="note">⚠ Match found in '+foundMod+'</span>');
-      const name=found.Company||((found.First_Name||'')+' '+(found.Last_Name||'')).trim()||'Unknown';
-      document.getElementById('crm-banner').innerHTML=`<div class="banner b-warn"><div class="bi">⚠</div><div><strong>Record already exists</strong><br>Found in <strong>${foundMod}</strong>: ${name}<br><span style="font-size:12px">No new record created.</span></div></div>`;
-      let act='';
-      if(found.id) act+=`<a class="crm-link" href="https://crm.zoho.${cfg.region}/crm/org/crm/${foundMod.toLowerCase()}/${found.id}" target="_blank">↗ Open in Zoho CRM</a><br>`;
-      act+=`<button class="btn btn-ghost" style="margin-top:14px" onclick="resetForNext()">Process Another Proposal</button>`;
-      document.getElementById('crm-actions').innerHTML=act;
+
+    if (found) {
+      log('<span class="note">⚠ Match found in ' + foundMod + '</span>');
+      const name = found.Company || ((found.First_Name||'') + ' ' + (found.Last_Name||'')).trim() || 'Unknown';
+      document.getElementById('crm-banner').innerHTML = `<div class="banner b-warn"><div class="bi">⚠</div><div><strong>Record already exists</strong><br>Found in <strong>${foundMod}</strong>: ${name}<br><span style="font-size:12px">No new record created.</span></div></div>`;
+      let act = '';
+      if (found.id) act += `<a class="crm-link" href="https://crm.zoho.com/crm/org/crm/${foundMod.toLowerCase()}/${found.id}" target="_blank">↗ Open in Zoho CRM</a><br>`;
+      act += `<button class="btn btn-ghost" style="margin-top:14px" onclick="resetForNext()">Process Another Proposal</button>`;
+      document.getElementById('crm-actions').innerHTML = act;
     } else {
       log('<span class="dim">→ No match — creating new Lead…</span>');
-      const np=(fields.contact_name||'').trim().split(' ');
-      const ln=np.length>1?np.slice(1).join(' '):(np[0]||fields.company_name||'Unknown');
-      const fn=np.length>1?np[0]:'';
-      const desc=[
-        fields.profession&&'Profession: '+fields.profession,
-        fields.gross_fees&&'Gross fees: '+fields.gross_fees,
-        fields.employees&&'Employees: '+fields.employees,
-        fields.indemnity_limit&&'Indemnity limit requested: '+fields.indemnity_limit,
-        fields.sra_number&&'SRA/Reg No: '+fields.sra_number,
-        fields.current_insurer&&'Current insurer: '+fields.current_insurer,
-        fields.current_broker&&'Current broker: '+fields.current_broker,
-        fields.inception_date&&'Inception/renewal date: '+fields.inception_date,
+      const np = (fields.contact_name||'').trim().split(' ');
+      const ln = np.length > 1 ? np.slice(1).join(' ') : (np[0] || fields.company_name || 'Unknown');
+      const fn = np.length > 1 ? np[0] : '';
+      const desc = [
+        fields.profession && 'Profession: ' + fields.profession,
+        fields.gross_fees && 'Gross fees: ' + fields.gross_fees,
+        fields.employees && 'Employees: ' + fields.employees,
+        fields.indemnity_limit && 'Indemnity limit requested: ' + fields.indemnity_limit,
+        fields.sra_number && 'SRA/Reg No: ' + fields.sra_number,
+        fields.current_insurer && 'Current insurer: ' + fields.current_insurer,
+        fields.current_broker && 'Current broker: ' + fields.current_broker,
+        fields.inception_date && 'Inception/renewal date: ' + fields.inception_date,
       ].filter(Boolean).join('\n');
-      const cr=await fetch(`https://www.zohoapis.${cfg.region}/crm/v3/Leads`,{
-        method:'POST',
-        headers:{'Authorization':'Zoho-oauthtoken '+token,'Content-Type':'application/json'},
-        body:JSON.stringify({data:[{Last_Name:ln,First_Name:fn,Company:fields.company_name||fields.trading_name||'Unknown',Email:fields.email||'',Phone:fields.phone||'',Lead_Source:'Proposal Form',Description:'PI Proposal received via Apex intake tool.\n\n'+desc,Street:fields.address||''}]})
+
+      const cr = await fetch(WORKER, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'zoho_create', token, leadData: { data: [{ Last_Name: ln, First_Name: fn, Company: fields.company_name || 'Unknown', Email: fields.email || '', Phone: fields.phone || '', Lead_Source: 'Proposal Form', Description: 'PI Proposal received via Apex intake tool.\n\n' + desc, Street: fields.address || '' }] } })
       });
-      const cd=await cr.json();
-      const res=cd.data?.[0];
-      if(res?.code==='SUCCESS'||res?.status==='success'){
-        const newId=res.details?.id;
+      const cd = await cr.json();
+      const res = cd.data?.[0];
+
+      if (res?.code === 'SUCCESS' || res?.status === 'success') {
+        const newId = res.details?.id;
         log('<span class="ok">✓ Lead created</span>');
         log('<span class="ok">✓ Lead Source: Proposal Form</span>');
         log('<span class="ok">✓ PI details saved to description</span>');
-        document.getElementById('crm-banner').innerHTML=`<div class="banner b-ok"><div class="bi">✓</div><div><strong>New Lead created in Zoho CRM</strong><br>${fields.company_name||fields.contact_name||'Lead'} added successfully.<br><span style="font-size:12px">Lead Source: Proposal Form. PI details in description.</span></div></div>`;
-        let act='';
-        if(newId) act+=`<a class="crm-link" href="https://crm.zoho.${cfg.region}/crm/org/crm/leads/${newId}" target="_blank">↗ Open New Lead in Zoho CRM</a><br>`;
-        act+=`<button class="btn btn-ghost" style="margin-top:14px" onclick="resetForNext()">Process Another Proposal</button>`;
-        document.getElementById('crm-actions').innerHTML=act;
+        document.getElementById('crm-banner').innerHTML = `<div class="banner b-ok"><div class="bi">✓</div><div><strong>New Lead created in Zoho CRM</strong><br>${fields.company_name || fields.contact_name || 'Lead'} added successfully.</div></div>`;
+        let act = '';
+        if (newId) act += `<a class="crm-link" href="https://crm.zoho.com/crm/org/crm/leads/${newId}" target="_blank">↗ Open New Lead in Zoho CRM</a><br>`;
+        act += `<button class="btn btn-ghost" style="margin-top:14px" onclick="resetForNext()">Process Another Proposal</button>`;
+        document.getElementById('crm-actions').innerHTML = act;
       } else {
-        throw new Error(res?.message||JSON.stringify(cd));
+        throw new Error(res?.message || JSON.stringify(cd));
       }
     }
-  }catch(err){
-    log('<span class="fail">✗ '+err.message+'</span>');
-    document.getElementById('crm-banner').innerHTML=`<div class="banner b-err"><div class="bi">✗</div><div><strong>Error</strong><br>${err.message}</div></div>`;
+  } catch(err) {
+    log('<span class="fail">✗ ' + err.message + '</span>');
+    document.getElementById('crm-banner').innerHTML = `<div class="banner b-err"><div class="bi">✗</div><div><strong>Error</strong><br>${err.message}</div></div>`;
   }
-  btn.disabled=false; btn.innerHTML='Check Zoho CRM';
+  btn.disabled = false; btn.innerHTML = 'Check Zoho CRM';
 }
 
-function resetForNext(){
-  pdfB64=null; extracted={}; fileInput.value='';
-  document.getElementById('fileChosen').style.display='none';
-  document.getElementById('btn-extract').disabled=true;
+function resetForNext() {
+  pdfB64 = null; fileInput.value = '';
+  document.getElementById('fileChosen').style.display = 'none';
+  document.getElementById('btn-extract').disabled = true;
   document.getElementById('card-fields').classList.add('hidden');
   document.getElementById('card-result').classList.add('hidden');
-  document.getElementById('fieldsGrid').innerHTML='';
+  document.getElementById('fieldsGrid').innerHTML = '';
   document.getElementById('ext-log').classList.add('hidden');
-  setNav(2);
-  document.getElementById('card-upload').scrollIntoView({behavior:'smooth',block:'start'});
+  setNav(1);
+  document.getElementById('card-upload').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 </script>
 </body>
