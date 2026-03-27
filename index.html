@@ -306,11 +306,11 @@ async function extractPDF(){
   try{
     const resp=await fetch('https://api.anthropic.com/v1/messages',{
       method:'POST',
-      headers:{'Content-Type':'application/json','x-api-key':cfg.anthropic,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-calls':'true'},
-      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:[
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({apiKey:cfg.anthropic,payload:{model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:[
         {type:'document',source:{type:'base64',media_type:'application/pdf',data:pdfB64}},
         {type:'text',text:prompt}
-      ]}]})
+      ]}]}})
     });
     if(!resp.ok){const e=await resp.json();throw new Error(e.error?.message||'Claude API error '+resp.status);}
     const data=await resp.json();
