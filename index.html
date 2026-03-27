@@ -304,7 +304,7 @@ async function extractPDF(){
   const prompt=`You are processing a Professional Indemnity insurance proposal form. Extract these fields and return ONLY a valid JSON object (empty string if not found):
 {"company_name":"Full legal name","trading_name":"Trading name if different","contact_name":"Primary contact full name","email":"Primary email","phone":"Primary phone","address":"Full address with postcode","profession":"Type of profession or activity","sra_number":"SRA or regulatory registration number","gross_fees":"Most recent gross fees or turnover","employees":"Total staff or fee earners","indemnity_limit":"Indemnity limit requested","current_insurer":"Current PI insurer","current_broker":"Current broker","inception_date":"Inception or renewal date"}`;
   try{
-    const resp=await fetch('https://api.anthropic.com/v1/messages',{
+    const resp=await fetch('https://apex-pi-proxy.matthew-bartlett.workers.dev',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({apiKey:cfg.anthropic,payload:{model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:[
