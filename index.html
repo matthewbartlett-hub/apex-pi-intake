@@ -315,7 +315,29 @@ async function checkCRM() {
     if (found) {
       log('<span class="note">⚠ Match found in ' + foundMod + '</span>');
       const name = found.Company || ((found.First_Name||'') + ' ' + (found.Last_Name||'')).trim() || 'Unknown';
-      document.getElementById('crm-banner').innerHTML = `<div class="banner b-warn"><div class="bi">⚠</div><div><strong>Record already exists</strong><br>Found in <strong>${foundMod}</strong>: ${name}<br><span style="font-size:12px">No new record created.</span></div></div>`;
+
+      // Attach the PDF to the existing record
+      if (found.id) {
+        log('<span class="dim">→ Attaching proposal PDF to existing record…</span>');
+        try {
+          const fname = document.getElementById('fileChosen').textContent.replace('📄 ','').split(' (')[0] || 'proposal.pdf';
+          const attachResp = await fetch(WORKER, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'zoho_attach', token, module: foundMod, recordId: found.id, pdfBase64: pdfB64, filename: fname })
+          });
+          const attachData = await attachResp.json();
+          if (attachData.data?.[0]?.code === 'SUCCESS' || attachData.data?.[0]?.status === 'success') {
+            log('<span class="ok">✓ Proposal attached to existing record</span>');
+          } else {
+            log('<span class="warn">⚠ Attachment may have failed: ' + JSON.stringify(attachData).substring(0,80) + '</span>');
+          }
+        } catch(e) {
+          log('<span class="warn">⚠ Attachment error: ' + e.message + '</span>');
+        }
+      }
+
+      document.getElementById('crm-banner').innerHTML = `<div class="banner b-warn"><div class="bi">⚠</div><div><strong>Record already exists in Zoho CRM</strong><br>Found in <strong>${foundMod}</strong>: ${name}<br><span style="font-size:12px">Proposal PDF attached to existing record.</span></div></div>`;
       let act = '';
       if (found.id) act += `<a class="crm-link" href="https://crm.zoho.com/crm/org/crm/${foundMod.toLowerCase()}/${found.id}" target="_blank">↗ Open in Zoho CRM</a><br>`;
       act += `<button class="btn btn-ghost" style="margin-top:14px" onclick="resetForNext()">Process Another Proposal</button>`;
